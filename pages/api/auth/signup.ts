@@ -10,12 +10,12 @@ export default async function handler(req, res) {
     const { username, email, password } = data;
 
     if (!username) {
-        res.status(422).json({message: 'Invalid username'});
+        res.status(422).json({message: 'Invalid input - username is empty'});
         return;
     }
 
     if (!email || !email.includes('@')) {
-        res.status(422).json({message: 'Invalid email'});
+        res.status(422).json({message: 'Invalid input - invalid email'});
         return;
     }
 
