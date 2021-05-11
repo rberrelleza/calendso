@@ -21,7 +21,7 @@ services:
     build: .
     environment:
      - DATABASE_URL=postgresql://postgres:p0stgr3s_pass@postgres:5432/postgres
-     - GOOGLE_API_CREDENTIALS="secret"
+     - GOOGLE_API_CREDENTIALS
      - NEXTAUTH_URL
     depends_on:
       - postgres
