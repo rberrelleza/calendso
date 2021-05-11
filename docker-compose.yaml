@@ -11,6 +11,8 @@ services:
     volumes:
       - calendso-db:/var/lib/postgresql/data
   prisma:
+    annotations:
+      dev.okteto.com/auto-ingress: "private"
     build: .
     environment:
     - DATABASE_URL=postgresql://postgres:p0stgr3s_pass@postgres:5432/postgres
@@ -18,6 +20,8 @@ services:
     ports: 
     - '5555:5555'
   calendso:
+    annotations:
+      dev.okteto.com/auto-ingress: "domain"
     build: .
     environment:
      - DATABASE_URL=postgresql://postgres:p0stgr3s_pass@postgres:5432/postgres
