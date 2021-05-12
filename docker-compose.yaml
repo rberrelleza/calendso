@@ -15,8 +15,8 @@ services:
     environment:
     - DATABASE_URL=postgresql://postgres:p0stgr3s_pass@postgres:5432/postgres
     command: "npx prisma studio"
-    ports: 
-    - '5555:5555'
+    expose: 
+    - '5555'
   calendso:
     annotations:
       dev.okteto.com/auto-ingress: "domain"
@@ -27,7 +27,7 @@ services:
      - NEXTAUTH_URL
     depends_on:
       - postgres
-    ports:
+    expose:
       - '3000:3000'      
 volumes:
   calendso-db:
