@@ -1,5 +1,5 @@
 name: calendso
-image: okteto/node:12
+image: okteto/node:14
 command: bash
 sync:
 - .:/usr/src/app

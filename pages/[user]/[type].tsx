@@ -130,6 +130,9 @@ export default function Type(props) {
       })
     , [selectedDate, selectedTimeZone])
 
+    console.log(`selectedDate ${selectedDate}`);
+    console.log(`times.length ${times.length}`);
+
     // Check for conflicts
     for(let i = times.length - 1; i >= 0; i -= 1) {
       busy.forEach(busyTime => {
