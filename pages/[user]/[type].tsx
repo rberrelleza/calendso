@@ -86,7 +86,12 @@ export default function Type(props) {
     }
 
     // Create placeholder elements for empty days in first week
-    const weekdayOfFirst = dayjs().month(selectedMonth).date(1).day();
+    let weekdayOfFirst = dayjs().month(selectedMonth).date(1).day();
+    if (props.user.weekStart === 'Monday') {
+      weekdayOfFirst -= 1;
+      if (weekdayOfFirst < 0)
+        weekdayOfFirst = 6;
+    }
     const emptyDays = Array(weekdayOfFirst).fill(null).map((day, i) =>
         <div key={`e-${i}`} className={"text-center w-10 h-10 rounded-full mx-auto"}>
             {null}
@@ -286,9 +291,11 @@ export default function Type(props) {
                   </div>
                 </div>
                 <div className="grid grid-cols-7 gap-y-4 text-center">
-                  <div className="uppercase text-gray-400 text-xs tracking-widest">
+                  {props.user.weekStart !== 'Monday' ? (
+                    <div className="uppercase text-gray-400 text-xs tracking-widest">
                     Sun
                   </div>
+                  ) : null}
                   <div className="uppercase text-gray-400 text-xs tracking-widest">
                     Mon
                   </div>
@@ -307,6 +314,11 @@ export default function Type(props) {
                   <div className="uppercase text-gray-400 text-xs tracking-widest">
                     Sat
                   </div>
+                  {props.user.weekStart === 'Monday' ? (
+                    <div className="uppercase text-gray-400 text-xs tracking-widest">
+                    Sun
+                  </div>
+                  ) : null}
                   {calendar}
                 </div>
               </div>
@@ -361,7 +373,8 @@ export async function getServerSideProps(context) {
             eventTypes: true,
             startTime: true,
             timeZone: true,
-            endTime: true
+            endTime: true,
+            weekStart: true,
         }
     });
 
